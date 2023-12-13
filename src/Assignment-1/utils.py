@@ -21,3 +21,4 @@ def find_customers_bought_all_models(purchase_data_df, product_data_df):
             .agg(countDistinct("product_model").alias("distinct_models"))
             .filter(col("distinct_models") == distinct_models)
             .select("customer"))
+    
