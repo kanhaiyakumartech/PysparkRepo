@@ -13,3 +13,4 @@ def mask_card_number(card_number):
 # Register the UDF
 def mask_card_udf():
     return udf(mask_card_number, StringType())
+    
