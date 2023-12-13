@@ -1,6 +1,7 @@
 from pyspark.sql import functions as F
 from pyspark.sql.types import DateType
 
+
 def process_data(spark, data):
     # Create DataFrame with custom schema
     columns = ["log_id", "user_id", "user_activity", "time_stamp"]
