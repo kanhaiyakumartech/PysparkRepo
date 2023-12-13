@@ -1,10 +1,4 @@
-# from utils import (
-#     create_employee_df, create_department_df, create_country_df,
-#     avg_salary_per_department, employee_name_department_starts_with_m,
-#     add_bonus_column, reorder_columns, join_dataframes,
-#     replace_state_with_country_name, convert_column_names_to_lower_case,
-#     add_load_date_column
-# )
+
 from src/Assignment-5/utils.py import *
 if __name__ == "__main__":
     spark = SparkSession.builder.appName("Assignment").getOrCreate()
@@ -55,4 +49,4 @@ if __name__ == "__main__":
     result_with_load_date = add_load_date_column(lower_case_df)
     result_with_load_date.show()
 
-    # spark.stop()
+
