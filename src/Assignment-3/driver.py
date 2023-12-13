@@ -18,6 +18,7 @@ if __name__ == "__main__":
         (8, 102, 'click', '2023-09-12 13:10:00')
     ]
 
+    
     # Process data
     df = process_data(spark, data)
 
