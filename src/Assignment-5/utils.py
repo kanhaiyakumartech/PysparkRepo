@@ -77,3 +77,4 @@ def convert_column_names_to_lower_case(employee_df):
 
 def add_load_date_column(employee_df):
     return employee_df.withColumn("load_date", current_date())
+
