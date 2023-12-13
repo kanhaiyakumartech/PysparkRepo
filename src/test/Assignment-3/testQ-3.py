@@ -15,5 +15,6 @@ class AssignmentTest(unittest.TestCase):
         result = convert_timestamp_to_date(self.log_data_df)
         self.assertEqual(result.count(), 8)  # Replace with the expected count
 
+
 if __name__ == "__main__":
     unittest.main()
