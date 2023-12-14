@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType
 from utils import *
 
+
 class TestCustomerFunctions(unittest.TestCase):
     def setUp(self):
         self.spark = SparkSession.builder.appName("TestPyspark").getOrCreate()

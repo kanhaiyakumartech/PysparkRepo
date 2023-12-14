@@ -2,6 +2,7 @@ import unittest
 from pyspark.sql import SparkSession
 from utils import mask_card_number
 
+
 class TestMaskCardNumber(unittest.TestCase):
     def setUp(self):
         self.spark = SparkSession.builder.appName("TestMaskCardNumber").getOrCreate()
