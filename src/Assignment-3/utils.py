@@ -3,15 +3,15 @@ from pyspark.sql.types import DateType
 
 
 def process_data(spark, data):
-    # Create DataFrame with custom schema
+    # 1Create DataFrame with custom schema
     columns = ["log_id", "user_id", "user_activity", "time_stamp"]
     df = spark.createDataFrame(data, columns)
 
-    # Query to calculate the number of actions performed by each user in the last 7 days
+    # 2 Query to calculate the number of actions performed by each user in the last 7 days
     last_7_days_df = df.filter((F.current_date() - F.to_date("time_stamp")).cast("int") <= 7)
     actions_by_user = last_7_days_df.groupBy("user_id").agg(F.count("log_id").alias("actions_last_7_days"))
 
-    # Convert timestamp to login_date with yyyy-MM-dd format
+    # 3Convert the time stamp column to login_date column with yyyy-MM-dd format with date type as its data type
     df = df.withColumn("login_date", F.to_date("time_stamp").cast(DateType())).drop("time_stamp")
 
     # Join the original DataFrame with the calculated actions
@@ -19,15 +19,12 @@ def process_data(spark, data):
 
     return df
 
+#4Write the data frame as csv file with different write options expect(merge condition)
 def write_csv(df, output_path):
     # Write DataFrame as CSV file
-    df.write.option("header", "true").mode("overwrite").csv(output_path)
+    df.write.option("csv")("header","true").mode("overwrite").csv("dbfs:/FileStore/tables/user.csv").save()
 
-# def write_csv(df, output_path):
-#     # Write DataFrame as CSV file
-#     df.write.option("csv")("header","true").mode("overwrite").csv("dbfs:/FileStore/tables/user.csv").save()
-#     #df.write.option("csv")("header", "true").mode("overwrite").csv(output_path)
-
+#5Write it as managed table with Database name as user and table name as login_details with overwrite mode.
 def write_managed_table(df, database, table, mode):
     # Create the database if it doesn't exist
     spark.sql(f"CREATE DATABASE IF NOT EXISTS {database}")
